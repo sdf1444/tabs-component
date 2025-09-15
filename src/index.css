@@ -1,11 +1,11 @@
 :root {
-  color-scheme: light dark;
-  --c-light: #eee;
-  --c-dark: #111;
+  --background: #eee;
+  --content: #222;
 }
 
 body {
-  background-color: light-dark(var(--c-light), var(--c-dark));
+  background-color: var(--background);
+  color: var(--content);
   display: grid;
   font-size: 2rem;
   margin: 0;
