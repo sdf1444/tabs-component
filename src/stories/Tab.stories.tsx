@@ -1,5 +1,5 @@
 // Storybook stories for the Tabs component.
-// Includes interactive variants (Pill, Underline) 
+// Includes interactive variant (with controls)
 // and static States to showcase all Figma design states.
 
 import type { Meta, StoryObj } from "@storybook/react";
@@ -12,174 +12,146 @@ import { tabsData } from "../data/tabsData";
 import "../components/tabs/tabs.scss";
 import "./storybook-states.scss";
 
-const meta: Meta<typeof TabList> = {
+const meta: Meta = {
   title: "Components/Tabs",
-  component: TabList,
   tags: ["autodocs"],
-  parameters: {
-    controls: { disable: true }
-  },
 };
 
 export default meta;
-type Story = StoryObj<typeof TabList>;
 
 /* ===============================
-   Pill Variant (interactive)
+   Shared Interactive Tabs
 ================================ */
-export const Pill: Story = {
-  render: () => {
-    const [selected, setSelected] = useState(0);
-    return (
-      <>
-        <TabList
-          variant="pill"
-          selectedIndex={selected}
-          setSelectedIndex={setSelected}
-        >
-          {tabsData.map((tab, i) => (
-            <Tab
-              key={i}
-              label={tab.label}
-              badgeContent={tab.badgeContent}
-              badgeVariant={tab.badgeVariant as any}
-              isSelected={selected === i}
-              onSelect={() => setSelected(i)}
-            />
-          ))}
-        </TabList>
-        <TabPanels selectedIndex={selected}>
-          {tabsData.map((tab, i) => (
-            <TabPanel
-              key={i}
-              layout={tab.layout as "list" | "grid"}
-              content={tab.content}
-            />
-          ))}
-        </TabPanels>
-      </>
-    );
-  },
+const InteractiveTabs = ({ variant }: { variant: "pill" | "underline" }) => {
+  const [selected, setSelected] = useState(0);
+
+  return (
+    <>
+      <TabList
+        variant={variant}
+        selectedIndex={selected}
+        setSelectedIndex={setSelected}
+      >
+        {tabsData.map((tab, i) => (
+          <Tab
+            key={i}
+            label={tab.label}
+            badgeContent={tab.badgeContent}
+            badgeVariant={tab.badgeVariant as any}
+            isSelected={selected === i}
+            onSelect={() => setSelected(i)}
+          />
+        ))}
+      </TabList>
+      <TabPanels selectedIndex={selected}>
+        {tabsData.map((tab, i) => (
+          <TabPanel
+            key={i}
+            layout={tab.layout as "list" | "grid"}
+            content={tab.content}
+          />
+        ))}
+      </TabPanels>
+    </>
+  );
 };
 
 /* ===============================
-   Underline Variant (interactive)
+   Interactive (variant via controls)
 ================================ */
-export const Underline: Story = {
-  render: () => {
-    const [selected, setSelected] = useState(0);
-    return (
-      <>
-        <TabList
-          variant="underline"
-          selectedIndex={selected}
-          setSelectedIndex={setSelected}
-        >
-          {tabsData.map((tab, i) => (
-            <Tab
-              key={i}
-              label={tab.label}
-              badgeContent={tab.badgeContent}
-              badgeVariant={tab.badgeVariant as any}
-              isSelected={selected === i}
-              onSelect={() => setSelected(i)}
-            />
-          ))}
-        </TabList>
-        <TabPanels selectedIndex={selected}>
-          {tabsData.map((tab, i) => (
-            <TabPanel
-              key={i}
-              layout={tab.layout as "list" | "grid"}
-              content={tab.content}
-            />
-          ))}
-        </TabPanels>
-      </>
-    );
+type InteractiveTabsProps = { variant: "pill" | "underline" };
+type InteractiveStory = StoryObj<InteractiveTabsProps>;
+
+export const Interactive: InteractiveStory = {
+  args: {
+    variant: "pill",
   },
+  argTypes: {
+    variant: {
+      control: { type: "radio" },
+      options: ["pill", "underline"],
+    },
+  },
+  render: ({ variant }) => <InteractiveTabs variant={variant} />,
 };
+
+/* ===============================
+   Helper: Static States Renderer
+================================ */
+const StaticStateTabs = ({
+  variant,
+  selected,
+  stateLabels,
+  selectedClass,
+  unselectedClass,
+}: {
+  variant: "pill" | "underline";
+  selected: boolean;
+  stateLabels: string[];
+  selectedClass: (i: number) => string | undefined;
+  unselectedClass: (i: number) => string | undefined;
+}) => (
+  <TabList
+    variant={variant}
+    selectedIndex={selected ? 0 : -1}
+    setSelectedIndex={() => {}}
+  >
+    {stateLabels.map((label, i) => (
+      <Tab
+        key={i}
+        label={label}
+        isSelected={selected}
+        className={selected ? selectedClass(i) : unselectedClass(i)}
+      />
+    ))}
+  </TabList>
+);
 
 /* ===============================
    Static States (design showcase)
    Matches Figma: Selected True/False
 ================================ */
-export const States: Story = {
-  parameters: { controls: { disable: true } }, // hide Controls for this story
+export const States: StoryObj = {
+  parameters: { controls: { disable: true } },
   render: () => {
     const stateLabels = ["Default", "Hover", "Active", "Focus"];
 
     const unselectedClass = (i: number) =>
-      i === 0
-        ? "storybook-default"
-        : i === 1
-        ? "storybook-hover"
-        : i === 2
-        ? "storybook-active"
-        : i === 3
-        ? "storybook-focus"
-        : undefined;
+      ["storybook-default", "storybook-hover", "storybook-active", "storybook-focus"][i];
 
     const selectedClass = (i: number) =>
-      i === 0
-        ? "storybook-selected-default"
-        : i === 1
-        ? "storybook-selected-hover"
-        : i === 2
-        ? "storybook-selected-active"
-        : i === 3
-        ? "storybook-selected-focus"
-        : undefined;
+      [
+        "storybook-selected-default",
+        "storybook-selected-hover",
+        "storybook-selected-active",
+        "storybook-selected-focus",
+      ][i];
 
     return (
       <div>
-        {/* Pill Variant */}
-        <section>
-          <h3>Pill Variant</h3>
+        {(["pill", "underline"] as const).map((variant) => (
+          <section key={variant}>
+            <h3>{variant[0].toUpperCase() + variant.slice(1)} Variant</h3>
 
-          <h4>Selected</h4>
-          <TabList variant="pill" selectedIndex={0} setSelectedIndex={() => {}}>
-            {stateLabels.map((label, i) => (
-              <Tab
-                key={i}
-                label={label}
-                isSelected
-                className={selectedClass(i)}
-              />
-            ))}
-          </TabList>
+            <h4>Selected</h4>
+            <StaticStateTabs
+              variant={variant}
+              selected
+              stateLabels={stateLabels}
+              selectedClass={selectedClass}
+              unselectedClass={unselectedClass}
+            />
 
-          <h4>Unselected</h4>
-          <TabList variant="pill" selectedIndex={-1} setSelectedIndex={() => {}}>
-            {stateLabels.map((label, i) => (
-              <Tab key={i} label={label} className={unselectedClass(i)} />
-            ))}
-          </TabList>
-        </section>
-
-        {/* Underline Variant */}
-        <section>
-          <h3>Underline Variant</h3>
-
-          <h4>Selected</h4>
-          <TabList variant="underline" selectedIndex={0} setSelectedIndex={() => {}}>
-            {stateLabels.map((label, i) => (
-              <Tab
-                key={i}
-                label={label}
-                isSelected
-                className={selectedClass(i)}
-              />
-            ))}
-          </TabList>
-
-          <h4>Unselected</h4>
-          <TabList variant="underline" selectedIndex={-1} setSelectedIndex={() => {}}>
-            {stateLabels.map((label, i) => (
-              <Tab key={i} label={label} className={unselectedClass(i)} />
-            ))}
-          </TabList>
-        </section>
+            <h4>Unselected</h4>
+            <StaticStateTabs
+              variant={variant}
+              selected={false}
+              stateLabels={stateLabels}
+              selectedClass={selectedClass}
+              unselectedClass={unselectedClass}
+            />
+          </section>
+        ))}
       </div>
     );
   },
