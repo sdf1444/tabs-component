@@ -111,7 +111,7 @@ const StaticStateTabs = ({
 export const States: StoryObj = {
   parameters: { controls: { disable: true } },
   render: () => {
-    const stateLabels = ["Default", "Hover", "Active", "Focus"];
+    const stateLabels = ["Default", "Hover", "Active", "Focus"] as const;
 
     const unselectedClass = (i: number) =>
       ["storybook-default", "storybook-hover", "storybook-active", "storybook-focus"][i];
@@ -124,9 +124,11 @@ export const States: StoryObj = {
         "storybook-selected-focus",
       ][i];
 
+    const variants: TabVariant[] = ["pill", "underline"];
+
     return (
       <div>
-        {(["pill", "underline"] as const).map((variant) => (
+        {variants.map((variant) => (
           <section key={variant}>
             <h3>{variant[0].toUpperCase() + variant.slice(1)} Variant</h3>
 
@@ -134,7 +136,7 @@ export const States: StoryObj = {
             <StaticStateTabs
               variant={variant}
               selected
-              stateLabels={stateLabels}
+              stateLabels={[...stateLabels]}
               selectedClass={selectedClass}
               unselectedClass={unselectedClass}
             />
@@ -143,7 +145,7 @@ export const States: StoryObj = {
             <StaticStateTabs
               variant={variant}
               selected={false}
-              stateLabels={stateLabels}
+              stateLabels={[...stateLabels]}
               selectedClass={selectedClass}
               unselectedClass={unselectedClass}
             />
