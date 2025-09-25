@@ -3,6 +3,8 @@
  * These are used across multiple components (Tab, TabList, Badge, etc.).
  */
 
+import { type ReactElement, type ReactNode } from "react"
+
 /* ===========================
    Variants
    =========================== */
@@ -19,6 +21,21 @@ export type TabLayout = "list" | "grid";
 /* ===========================
    Props
    =========================== */
+
+/** Props for Tab panels */
+export type TabPanelsProps = {
+  children: ReactElement<TabPanelProps>[]; // tab panels
+  selectedIndex: number;                   // current active panel
+};
+
+/** Props for a Tab panel */
+export type TabPanelProps = {
+  children?: React.ReactNode;      // custom content
+  isSelected?: boolean;            // whether this panel is visible
+  index?: number;                  // for aria attributes
+  layout?: "list" | "grid";        // content layout type
+  content?: ReactNode;             // optional structured data
+};
 
 /** Props for a single Tab component */
 export type TabProps = {

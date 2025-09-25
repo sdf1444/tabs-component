@@ -1,13 +1,8 @@
 // Manages multiple TabPanel components. 
 // Ensures only the currently selected panel is visible, using index matching.
 
-import React, { type ReactElement } from "react";
-import { type TabPanelProps } from "./TabPanel";
-
-export type TabPanelsProps = {
-  children: ReactElement<TabPanelProps>[]; // tab panels
-  selectedIndex: number;                   // current active panel
-};
+import React from "react";
+import { type TabPanelsProps, type TabPanelProps } from "../../types/types";
 
 export const TabPanels: React.FC<TabPanelsProps> = ({
   children,
