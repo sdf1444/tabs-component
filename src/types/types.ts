@@ -22,6 +22,13 @@ export type TabLayout = "list" | "grid";
    Props
    =========================== */
 
+/** Props for a Badge */
+export type BadgeProps = {
+  content?: string | number;  // text or number inside the badge
+  variant?: BadgeVariant;     // style (neutral/positive/negative)
+  ariaLabel?: string;         // optional accessible label
+};
+
 /** Props for Tab panels */
 export type TabPanelsProps = {
   children: ReactElement<TabPanelProps>[]; // tab panels
