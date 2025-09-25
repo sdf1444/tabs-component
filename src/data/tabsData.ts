@@ -1,6 +1,8 @@
 // Demo tab configuration used by App.tsx and Storybook.
 
-export const tabsData = [
+import type { TabData } from "../types/types";
+
+export const tabsData: TabData[] = [
   {
     label: "Emails",
     content: ["✉️ Inbox 1", "✉️ Inbox 2", "✉️ Inbox 3"],

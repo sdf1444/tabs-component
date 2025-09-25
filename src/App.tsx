@@ -17,13 +17,17 @@ export default function App() {
       {/* Pill Variant */}
       <section className="demo__section">
         <h2 className="demo__heading">Pill Variant</h2>
-        <TabList variant="pill" selectedIndex={pillIndex} setSelectedIndex={setPillIndex}>
+        <TabList
+          variant="pill"
+          selectedIndex={pillIndex}
+          setSelectedIndex={setPillIndex}
+        >
           {tabsData.map((tab, i) => (
             <Tab
               key={i}
               label={tab.label}
               badgeContent={tab.badgeContent}
-              badgeVariant={tab.badgeVariant as any}
+              badgeVariant={tab.badgeVariant}
               isSelected={pillIndex === i}
               onSelect={() => setPillIndex(i)}
             />
@@ -31,7 +35,11 @@ export default function App() {
         </TabList>
         <TabPanels selectedIndex={pillIndex}>
           {tabsData.map((tab, i) => (
-            <TabPanel key={i} layout={tab.layout as "list" | "grid"} content={tab.content} />
+            <TabPanel
+              key={i}
+              layout={tab.layout}
+              content={tab.content}
+            />
           ))}
         </TabPanels>
       </section>
@@ -39,13 +47,17 @@ export default function App() {
       {/* Underline Variant */}
       <section className="demo__section">
         <h2 className="demo__heading">Underline Variant</h2>
-        <TabList variant="underline" selectedIndex={underlineIndex} setSelectedIndex={setUnderlineIndex}>
+        <TabList
+          variant="underline"
+          selectedIndex={underlineIndex}
+          setSelectedIndex={setUnderlineIndex}
+        >
           {tabsData.map((tab, i) => (
             <Tab
               key={i}
               label={tab.label}
               badgeContent={tab.badgeContent}
-              badgeVariant={tab.badgeVariant as any}
+              badgeVariant={tab.badgeVariant}
               isSelected={underlineIndex === i}
               onSelect={() => setUnderlineIndex(i)}
             />
@@ -53,7 +65,11 @@ export default function App() {
         </TabList>
         <TabPanels selectedIndex={underlineIndex}>
           {tabsData.map((tab, i) => (
-            <TabPanel key={i} layout={tab.layout as "list" | "grid"} content={tab.content} />
+            <TabPanel
+              key={i}
+              layout={tab.layout}
+              content={tab.content}
+            />
           ))}
         </TabPanels>
       </section>

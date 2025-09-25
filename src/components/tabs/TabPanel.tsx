@@ -1,14 +1,14 @@
 // Content container for a single tab. 
 // Handles visibility (shown when selected, hidden otherwise) and supports list or grid layouts.
 
-import React from "react";
+import React,{ type ReactNode } from "react";
 
 export type TabPanelProps = {
   children?: React.ReactNode;      // custom content
   isSelected?: boolean;            // whether this panel is visible
   index?: number;                  // for aria attributes
   layout?: "list" | "grid";        // content layout type
-  content?: string[];              // optional structured data
+  content?: ReactNode;             // optional structured data
 };
 
 export const TabPanel: React.FC<TabPanelProps> = ({

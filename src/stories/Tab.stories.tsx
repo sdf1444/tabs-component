@@ -9,6 +9,7 @@ import { Tab } from "../components/tabs/Tab";
 import { TabPanels } from "../components/tabs/TabPanels";
 import { TabPanel } from "../components/tabs/TabPanel";
 import { tabsData } from "../data/tabsData";
+import type { TabVariant } from "../types/types";
 import "../components/tabs/tabs.scss";
 import "./storybook-states.scss";
 
@@ -22,7 +23,7 @@ export default meta;
 /* ===============================
    Shared Interactive Tabs
 ================================ */
-const InteractiveTabs = ({ variant }: { variant: "pill" | "underline" }) => {
+const InteractiveTabs = ({ variant }: { variant: TabVariant }) => {
   const [selected, setSelected] = useState(0);
 
   return (
@@ -37,7 +38,7 @@ const InteractiveTabs = ({ variant }: { variant: "pill" | "underline" }) => {
             key={i}
             label={tab.label}
             badgeContent={tab.badgeContent}
-            badgeVariant={tab.badgeVariant as any}
+            badgeVariant={tab.badgeVariant}
             isSelected={selected === i}
             onSelect={() => setSelected(i)}
           />
@@ -45,11 +46,7 @@ const InteractiveTabs = ({ variant }: { variant: "pill" | "underline" }) => {
       </TabList>
       <TabPanels selectedIndex={selected}>
         {tabsData.map((tab, i) => (
-          <TabPanel
-            key={i}
-            layout={tab.layout as "list" | "grid"}
-            content={tab.content}
-          />
+          <TabPanel key={i} layout={tab.layout} content={tab.content} />
         ))}
       </TabPanels>
     </>
@@ -59,7 +56,7 @@ const InteractiveTabs = ({ variant }: { variant: "pill" | "underline" }) => {
 /* ===============================
    Interactive (variant via controls)
 ================================ */
-type InteractiveTabsProps = { variant: "pill" | "underline" };
+type InteractiveTabsProps = { variant: TabVariant };
 type InteractiveStory = StoryObj<InteractiveTabsProps>;
 
 export const Interactive: InteractiveStory = {
@@ -85,7 +82,7 @@ const StaticStateTabs = ({
   selectedClass,
   unselectedClass,
 }: {
-  variant: "pill" | "underline";
+  variant: TabVariant;
   selected: boolean;
   stateLabels: string[];
   selectedClass: (i: number) => string | undefined;

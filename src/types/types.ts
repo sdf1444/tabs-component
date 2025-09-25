@@ -39,3 +39,11 @@ export type TabListProps = {
   setSelectedIndex?: (i: number) => void;                                   // callback to update selected tab
   variant?: TabVariant;                                                     // visual style (pill | underline)
 };
+
+export interface TabData {
+  label: string;
+  badgeContent?: string;
+  badgeVariant?: BadgeVariant;
+  layout: TabLayout;
+  content?: React.ReactNode;
+}
