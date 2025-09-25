@@ -1,0 +1,134 @@
+/* ==================================================
+   Storybook visual state helpers
+   These freeze components into hover, active, focus states
+   for design review. Not used in production.
+   &:hover overrides are intentional to lock styles.
+================================================== */
+
+/* ===========================
+   Selected States
+   =========================== */
+.storybook-selected-default,
+.storybook-selected-hover,
+.storybook-selected-active,
+.storybook-selected-focus {
+  &.tab-selected {
+    border-color: transparent;
+
+    .tab-list.underline & {
+      background: var(--tab-underline-bg-selected);
+      border-radius: 2px;
+    }
+  }
+}
+
+.storybook-selected-default.tab-selected {
+  background: var(--tab-pill-bg-selected);
+
+  &:hover {
+    background: var(--tab-pill-bg-selected);
+  }
+
+  .tab-list.underline & {
+    border-bottom-color: var(--tab-underline-border-selected);
+  }
+}
+
+.storybook-selected-hover.tab-selected {
+  background: var(--tab-pill-bg-selected-hover);
+
+  &:hover {
+    background: var(--tab-pill-bg-selected-hover);
+  }
+
+  .tab-list.underline & {
+    border-bottom-color: var(--tab-underline-border-selected-hover);
+  }
+}
+
+.storybook-selected-active.tab-selected {
+  background: var(--tab-pill-bg-selected-active);
+
+  &:hover {
+    background: var(--tab-pill-bg-selected-active);
+  }
+
+  .tab-list.underline & {
+    border-bottom-color: var(--tab-underline-border-selected-active);
+  }
+}
+
+.storybook-selected-focus.tab-selected {
+  outline: 2px solid var(--tab-focus-ring);
+  outline-offset: 2px;
+
+  &:hover {
+    background: var(--tab-pill-bg-selected);
+  }
+
+  .tab-list.underline & {
+    border-bottom-color: var(--tab-underline-border-selected-focus);
+  }
+}
+
+/* ===========================
+   Unselected States
+   =========================== */
+.storybook-default {
+  background: var(--tab-pill-bg-default);
+  border: 1px solid var(--tab-pill-border-default);
+
+  &:hover {
+    background: var(--tab-pill-bg-default);
+    border-color: var(--tab-pill-border-default);
+  }
+
+  .tab-list.underline & {
+    border-bottom-color: var(--tab-underline-border-default);
+
+    &:hover {
+      border-bottom-color: var(--tab-underline-border-default);
+    }
+  }
+}
+
+.storybook-hover {
+  background: var(--tab-pill-bg-hover);
+  border-color: var(--tab-pill-border-hover);
+  color: var(--tab-text-default);
+
+  &:hover {
+    background: var(--tab-pill-bg-hover);
+  }
+
+  .tab-list.underline & {
+    border-bottom-color: var(--tab-underline-border-hover);
+  }
+}
+
+.storybook-active {
+  background: var(--tab-pill-bg-active);
+  border-color: var(--tab-pill-border-active);
+
+  &:hover {
+    background: var(--tab-pill-bg-active);
+  }
+
+  .tab-list.underline & {
+    border-bottom-color: var(--tab-underline-border-active);
+  }
+}
+
+.storybook-focus {
+  outline: 2px solid var(--tab-focus-ring);
+  outline-offset: 2px;
+
+  &:hover {
+    background: var(--tab-pill-bg-default);
+  }
+
+  .tab-list.underline & {
+    border-radius: 2px;
+    border-bottom-color: var(--tab-underline-border-focus);
+  }
+}

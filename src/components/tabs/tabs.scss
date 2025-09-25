@@ -1,0 +1,331 @@
+/* Core styling for Tabs and Badges.
+   Uses design tokens for pill/underline variants,
+   typography, spacing, and responsive layout rules.
+*/
+
+:root {
+  --font-family-base: "Inter", sans-serif;
+
+  /* ===========================
+     Typography
+     =========================== */
+  --tab-font-size: 0.875rem;       /* 14px */
+  --tab-line-height: 1.5;          /* 150% */
+  --tab-font-weight: 700;
+
+  --badge-font-size: 0.75rem;      /* 12px */
+  --badge-line-height: 1.5;        /* 150% */
+  --badge-font-weight: 700;
+
+  /* ===========================
+     Spacing Scale
+     =========================== */
+  --spacing-4xs: 0.125rem; /* 2px */
+  --spacing-3xs: 0.25rem;  /* 4px */
+  --spacing-2xs: 0.5rem;   /* 8px */
+  --spacing-xs: 0.75rem;   /* 12px */
+  --spacing-s: 1rem;       /* 16px */
+  --spacing-m: 1.25rem;    /* 20px */
+  --spacing-l: 1.5rem;     /* 24px */
+  --spacing-xl: 2rem;      /* 32px */
+  --spacing-2xl: 2.5rem;   /* 40px */
+
+  /* ===========================
+     Badge
+     =========================== */
+  --badge-bg-neutral: #F1F1F7;
+  --badge-bg-positive: #B1FFC7;
+  --badge-bg-negative: #FFBFB1;
+
+  /* ===========================
+     Tab – Pill Variant
+     =========================== */
+  /* Backgrounds */
+  --tab-pill-bg-default: #FFFFFF;
+  --tab-pill-bg-hover: #F6F6FA;
+  --tab-pill-bg-active: #F1F1F7;
+  --tab-pill-bg-selected: #1B2134;
+  --tab-pill-bg-selected-hover: #343A4E;
+  --tab-pill-bg-selected-active: #585D71;
+  --tab-pill-bg-focus: #FFFFFF;
+
+  /* Borders */
+  --tab-pill-border-default: #D3D3DC;
+  --tab-pill-border-hover: #C4C5CF;
+  --tab-pill-border-active: #C4C5CF;
+  --tab-pill-border-selected: transparent;
+  --tab-pill-border-focus: #D3D3DC;
+
+  /* ===========================
+     Tab – Underline Variant
+     =========================== */
+  /* Backgrounds */
+  --tab-underline-bg-default: transparent;
+  --tab-underline-bg-hover: transparent;
+  --tab-underline-bg-active: transparent;
+  --tab-underline-bg-focus: transparent;
+  --tab-underline-bg-selected: transparent;
+  --tab-underline-bg-selected-hover: transparent;
+  --tab-underline-bg-selected-active: transparent;
+  --tab-underline-bg-selected-focus: transparent;
+
+  /* Borders */
+  --tab-underline-border-default: transparent;
+  --tab-underline-border-hover: #C4C5CF;
+  --tab-underline-border-active: #C4C5CF;
+  --tab-underline-border-focus: #C4C5CF;
+  --tab-underline-border-selected: #1B2134;
+  --tab-underline-border-selected-hover: #1B2134;
+  --tab-underline-border-selected-active: #1B2134;
+  --tab-underline-border-selected-focus: #1B2134;
+
+  /* ===========================
+     Text & Focus
+     =========================== */
+  --tab-text-default: #1B2134;
+  --tab-text-inverse: #FFFFFF;
+  --tab-focus-ring: #1B2134;
+}
+
+/* ===========================
+   Base Tab (Pill variant)
+   =========================== */
+.tab {
+  all: unset;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  border: 1px solid var(--tab-pill-border-default);
+  border-radius: 9999px;
+  font-family: var(--font-family-base);
+  font-size: var(--tab-font-size);
+  line-height: var(--tab-line-height);
+  font-weight: var(--tab-font-weight);
+  color: var(--tab-text-default);
+  cursor: pointer;
+  white-space: nowrap;
+  flex: 0 0 auto;
+
+  height: 50px;
+  padding: 0 var(--spacing-s);
+
+  &:hover {
+    background: var(--tab-pill-bg-hover);
+    border-color: var(--tab-pill-border-hover);
+  }
+
+  &:active {
+    background: var(--tab-pill-bg-active);
+    border-color: var(--tab-pill-border-active);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--tab-focus-ring);
+    outline-offset: 2px;
+    border-color: var(--tab-pill-border-focus);
+  }
+
+  &-selected {
+    background: var(--tab-pill-bg-selected);
+    color: var(--tab-text-inverse);
+    border-color: var(--tab-pill-border-selected);
+
+    &:hover {
+      background: var(--tab-pill-bg-selected-hover);
+      border-color: var(--tab-pill-border-selected);
+    }
+
+    &:active {
+      background: var(--tab-pill-bg-selected-active);
+      border-color: var(--tab-pill-border-selected);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--tab-focus-ring);
+      outline-offset: 2px;
+      border-color: var(--tab-pill-border-focus);
+    }
+  }
+}
+
+/* ===========================
+   Underline Variant
+   =========================== */
+.tab-list.underline {
+  gap: var(--spacing-xl);
+
+  .tab {
+    border: none;
+    border-radius: 0;
+    background: var(--tab-underline-bg-default);
+    color: var(--tab-text-default);
+    border-bottom: 3px solid var(--tab-underline-border-default);
+    height: 50px;
+    padding: 0;
+
+    &:hover {
+      background: var(--tab-underline-bg-hover);
+      border-bottom-color: var(--tab-underline-border-hover);
+    }
+
+    &:active {
+      background: var(--tab-underline-bg-active);
+      border-bottom-color: var(--tab-underline-border-active);
+    }
+
+    &:focus-visible {
+      background: var(--tab-underline-bg-focus);
+      border-radius: 2px;
+      outline: 2px solid var(--tab-focus-ring);
+      outline-offset: 2px;
+      border-bottom: 3px solid var(--tab-underline-border-focus);
+    }
+
+    &-selected {
+      background: var(--tab-underline-bg-selected);
+      border-bottom-color: var(--tab-underline-border-selected);
+
+      &:hover {
+        background: var(--tab-underline-bg-selected-hover);
+        border-bottom-color: var(--tab-underline-border-selected-hover);
+      }
+
+      &:active {
+        background: var(--tab-underline-bg-selected-active);
+        border-bottom-color: var(--tab-underline-border-selected-active);
+      }
+
+      &:focus-visible {
+        background: var(--tab-underline-bg-selected-focus);
+        border-radius: 2px;
+        outline: 2px solid var(--tab-focus-ring);
+        outline-offset: 2px;
+        border-bottom: 3px solid var(--tab-underline-border-selected-focus);
+      }
+    }
+  }
+}
+
+/* ===========================
+   Badge
+   =========================== */
+.badge {
+  display: inline-block;
+  font-family: var(--font-family-base);
+  font-size: var(--badge-font-size);
+  line-height: var(--badge-line-height);
+  font-weight: var(--badge-font-weight);
+  border-radius: 9999px;
+  white-space: nowrap;
+  color: #000;
+  padding: var(--spacing-3xs) var(--spacing-2xs);
+
+  &--neutral {
+    background: var(--badge-bg-neutral);
+  }
+  &--positive {
+    background: var(--badge-bg-positive);
+  }
+  &--negative {
+    background: var(--badge-bg-negative);
+  }
+}
+
+/* ===========================
+   Tab Panel
+   =========================== */
+.tab-panel {
+  margin-top: var(--spacing-s);
+  font-family: var(--font-family-base);
+  font-size: var(--tab-font-size);
+  line-height: var(--tab-line-height);
+  font-weight: var(--tab-font-weight);
+  color: var(--tab-text-default);
+
+  &--hidden {
+    display: none !important;
+  }
+
+  &.list {
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-xs);
+    }
+
+    li {
+      padding: var(--spacing-xs) var(--spacing-s);
+      border: 1px solid var(--tab-pill-border-default);
+      border-radius: 0.5rem;
+      background: #fff;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+  }
+
+  &.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-xs);
+
+    > div {
+      background: var(--badge-bg-neutral);
+      padding: var(--spacing-m) var(--spacing-s);
+      border-radius: 0.75rem;
+      text-align: center;
+      border: 1px solid var(--tab-pill-border-default);
+      font-weight: 500;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+    }
+  }
+}
+
+/* ===========================
+   Tab List Layout
+   =========================== */
+.tab-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--spacing-xs);
+}
+
+/* ===========================
+   Responsive overrides
+   =========================== */
+@media (min-width: 768px) {
+  .tab-panel.grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .tab {
+    height: 42px;
+    padding: 0 var(--spacing-xs);
+  }
+
+  .tab-list.underline {
+    gap: var(--spacing-l);
+
+    .tab {
+      height: 42px;
+    }
+  }
+
+  .tab-list {
+    flex-wrap: nowrap;
+    gap: var(--spacing-2xs);
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .badge {
+    padding: var(--spacing-4xs) var(--spacing-3xs);
+  }
+}

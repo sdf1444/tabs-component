@@ -1,9 +1,13 @@
+// Entry point for the Tabs demo application.
+// Renders the App component into the root DOM node.
+
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
+import App from "./App";
+import "./index.scss";
 
-const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement,
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );
-
-root.render(<React.StrictMode>👋</React.StrictMode>);
