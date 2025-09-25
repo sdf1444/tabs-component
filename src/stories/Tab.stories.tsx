@@ -8,6 +8,7 @@ import { TabList } from "../components/tabs/TabList";
 import { Tab } from "../components/tabs/Tab";
 import { TabPanels } from "../components/tabs/TabPanels";
 import { TabPanel } from "../components/tabs/TabPanel";
+import { tabsData } from "../data/tabsData";
 import "../components/tabs/tabs.scss";
 import "./storybook-states.scss";
 
@@ -23,34 +24,6 @@ const meta: Meta<typeof TabList> = {
 export default meta;
 type Story = StoryObj<typeof TabList>;
 
-const tabs = [
-  {
-    label: "Emails",
-    content: ["✉️ Inbox 1", "✉️ Inbox 2", "✉️ Inbox 3"],
-    badgeVariant: "neutral",
-    layout: "list",
-  },
-  {
-    label: "Files",
-    content: ["📂 Report.pdf", "📂 Design.sketch", "📂 Notes.txt"],
-    badgeContent: "Warning",
-    badgeVariant: "negative",
-    layout: "grid",
-  },
-  {
-    label: "Edits",
-    content: ["✏️ Change 1", "✏️ Change 2"],
-    badgeVariant: "negative",
-    layout: "list",
-  },
-  {
-    label: "Downloads",
-    content: ["⬇️ Setup.exe", "⬇️ Installer.pkg", "⬇️ Archive.zip"],
-    layout: "grid",
-  },
-  { label: "Messages", content: ["💬 Chat 1", "💬 Chat 2"], layout: "list" },
-];
-
 /* ===============================
    Pill Variant (interactive)
 ================================ */
@@ -64,7 +37,7 @@ export const Pill: Story = {
           selectedIndex={selected}
           setSelectedIndex={setSelected}
         >
-          {tabs.map((tab, i) => (
+          {tabsData.map((tab, i) => (
             <Tab
               key={i}
               label={tab.label}
@@ -76,7 +49,7 @@ export const Pill: Story = {
           ))}
         </TabList>
         <TabPanels selectedIndex={selected}>
-          {tabs.map((tab, i) => (
+          {tabsData.map((tab, i) => (
             <TabPanel
               key={i}
               layout={tab.layout as "list" | "grid"}
@@ -102,7 +75,7 @@ export const Underline: Story = {
           selectedIndex={selected}
           setSelectedIndex={setSelected}
         >
-          {tabs.map((tab, i) => (
+          {tabsData.map((tab, i) => (
             <Tab
               key={i}
               label={tab.label}
@@ -114,7 +87,7 @@ export const Underline: Story = {
           ))}
         </TabList>
         <TabPanels selectedIndex={selected}>
-          {tabs.map((tab, i) => (
+          {tabsData.map((tab, i) => (
             <TabPanel
               key={i}
               layout={tab.layout as "list" | "grid"}
